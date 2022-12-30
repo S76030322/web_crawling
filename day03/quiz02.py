@@ -51,16 +51,21 @@ while True:
     # src >> "data"형식, "http"형식 혼용
 
     # 구글에서 새로운 형식 도입시 에러가 발생 할 수 있으므로 try:except으로 처리
-        img_path = i.get('src')
-        
-        if type(img_path) != str:
-            img_path = i.get('data-src')
-        
-        # 이미지 이름 추출 및 정규표현식
-        img_name = i.get('alt')
-        img_name = re.sub('[\/:*?"<>|]',"_",img_name)  
-        img_type = img_path.split(":")[0]
+        try:
+            img_path = i.get('src')
+            
+            if type(img_path) != str:
+                img_path = i.get('data-src')
 
+            # 이미지 이름 추출 및 정규표현식
+            img_name = i.get('alt')
+            img_name = re.sub('[\/:*?"<>|]',"_",img_name)  
+            img_type = img_path.split(":")[0]
+
+        except:
+            pass
+
+        # 확인용
         # print(img_path)
         # print(img_type)
 
